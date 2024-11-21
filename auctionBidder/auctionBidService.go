@@ -2,17 +2,17 @@ package auctionBidder
 
 import "context"
 
-type auctionBidderService struct {
+type AuctionBidderService struct {
 }
 
-func (ABS *auctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction, error) {
+func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction, error) {
 
 }
 
 // Server sends result to all bidders
-func (ABS *auctionBidderService) Result(context.Context, *Empty) (*Result, error) {
+func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error) {
 
 }
-func (ABS *auctionBidderService) mustEmbedUnimplementedCommunicationServer() {
+func (ABS *AuctionBidderService) mustEmbedUnimplementedCommunicationServer() {
 	panic("unimplemented")
 }
