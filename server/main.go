@@ -20,13 +20,13 @@ func main() {
 	log.Println("Listening @ : " + Port)
 
 	grpcserver := grpc.NewServer()
-	
-	/* 
-	SETUP THE AUCTION INSTEAD OF BOOTSERVERSERVICE{}
+
+	/*
+		SETUP THE AUCTION INSTEAD OF BOOTSERVERSERVICE{}
 	*/
-	
-	//cs := auctionBidder.BootServerService{}
-	//auctionBidder.RegisterCommunicationServer(grpcserver, &cs)
+
+	cs := auctionBidder.AuctionBidderService{}
+	auctionBidder.RegisterCommunicationServer(grpcserver, &cs)
 
 	grpcserver.Serve(listen)
 
