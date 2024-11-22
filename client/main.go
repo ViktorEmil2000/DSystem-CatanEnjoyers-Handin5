@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -36,9 +35,9 @@ func initializeBidder() {
 	}
 
 	if result.ID == userId {
-		fmt.Printf("Yes my bid is the higest! my ID was: %s", userId)
+		log.Printf("Yes my bid is the higest! my ID was: %s", userId)
 	} else {
-		fmt.Printf("My was not high enough! my ID was: %s", userId)
+		log.Printf("My was not high enough! my ID was: %s", userId)
 	}
 }
 
