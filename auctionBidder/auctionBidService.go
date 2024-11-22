@@ -7,12 +7,12 @@ import (
 )
 
 var (
-	auctionLive      bool
-	highestbid       bid
-	highestbidder    int64
-	bidders          []bidder
-	AuctionStartTime int
+	auctionLive   bool
+	highestbid    bid
+	highestbidder int64
+	bidders       []bidder
 )
+var AuctionStartTime = 0
 
 type bidder struct {
 	id   int64
@@ -28,10 +28,6 @@ type AuctionBidderService struct {
 }
 
 func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction, error) {
-	if !auctionLive {
-		auctionLive = true
-		AuctionStartTime = int(time.Now().Unix())
-	}
 
 	if !checkAuctionOver() {
 		BidderExists := false
@@ -71,10 +67,21 @@ func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction
 
 func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error) {
 	if !auctionLive {
+		AuctionStartTime++
+		if AuctionStartTime >= 5 {
+			auctionLive = true
+			AuctionStartTime = int(time.Now().Unix())
+		}
+	}
+
+	if !auctionLive {
+		log.Print("As user queried Result and was told : Auction hasen't started yet!")
 		return &Result{AuctionActive: auctionLive, Comment: "Auction hasen't started yet!", AuctionOver: false}, nil
 	} else if checkAuctionOver() {
+		log.Print("As user queried Result and was told : Auction is over")
 		return &Result{AuctionActive: false, Comment: "Auction is over", AuctionOver: true, ID: highestbidder, Amount: highestbid.bidamount}, nil
 	} else {
+		log.Print("As user queried Result and was told : Auctions is going and we have a highest bid")
 		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
 	}
 }
