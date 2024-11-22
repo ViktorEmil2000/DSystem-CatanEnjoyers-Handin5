@@ -42,23 +42,23 @@ func initializeBidder(userId int64, highestBid int64, MoneyAmount int64) {
 	}
 
 	if result.ID == userId {
-		fmt.Printf("I have won! my ID was: %s", userId)
+		fmt.Printf("Yes my bid is the higest! my ID was: %s", userId)
 	} else {
-		fmt.Printf("I didn't win! my ID was: %s", userId)
+		fmt.Printf("My was not high enough! my ID was: %s", userId)
 	}
 }
 
 func startBidding(Client auctionBidder.CommunicationClient, userId int64, highestBid int64, MoneyAmount int64) (*auctionBidder.Result, error) {
-	for{
+	for {
 		time.Sleep(100)
 		result, err := Client.Result(context.Background(), &auctionBidder.Empty{})
 		if err != nil {
 			log.Fatalf("Could not get receive %s:", err)
 		}
-		if(result.AuctionOver){
+		if result.AuctionOver {
 			return result, err
 		}
-		
+
 		if result.AuctionActive {
 			if userId != result.ID {
 				highestBid = result.Amount
@@ -68,7 +68,11 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, highes
 					log.Printf("%s: with %s I can't afford to bid higher than the current bid: %s, so I'm outta here", userId, MoneyAmount, highestBid)
 					return result, err
 				} else {
-					sendBid(Client, userId, highestBid)
+					Client.Bid(context.Background(), &auctionBidder.FromBidder{
+						Amount:    sendBid(highestBid),
+						ID:        userId,
+						Timestamp: time.Now().Unix(),
+					})
 				}
 
 			} else {
@@ -79,12 +83,9 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, highes
 	}
 }
 
-func sendBid(Client auctionBidder.CommunicationClient, userId int64, highestBid int64) int64 {
+func sendBid(highestBid int64) int64 {
 	var bidAmount = highestBid + int64(rand.Intn(900)+100)
-	Client.Bid()
-
-	
-
+	return bidAmount
 }
 
 func queryAuctionServer() {
