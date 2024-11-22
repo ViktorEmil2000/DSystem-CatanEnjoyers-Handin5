@@ -35,5 +35,6 @@ message Result{
   bool AuctionActive = 1;
   string comment = 2;
   int64 ID = 3;
+  int64 ammount = 4;
 
 }

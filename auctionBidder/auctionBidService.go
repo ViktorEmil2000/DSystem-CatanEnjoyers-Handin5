@@ -3,9 +3,10 @@ package auctionBidder
 import "context"
 
 var (
-	auctionLive bool
-	highestbid  bid
-	bidders     []bidder
+	auctionLive   bool
+	highestbid    bid
+	highestbidder int64
+	bidders       []bidder
 )
 
 type bidder struct {
@@ -22,17 +23,18 @@ type AuctionBidderService struct {
 }
 
 func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction, error) {
-	if auctionLive == false {
+	if !auctionLive {
 		auctionLive = true
 	}
-	check := false
+	BidderExists := false
 	for _, element := range bidders {
 		if (element.id == FromBidder{}.ID) {
-			check = true
+			BidderExists = true
 			element.bids = append(element.bids, bid{FromBidder{}.Amount, FromBidder{}.Timestamp})
+			break
 		}
 	}
-	if check == false {
+	if BidderExists == false {
 		temp := []bid{}
 		temp = append(temp, bid{FromBidder{}.Amount, FromBidder{}.Timestamp})
 		bidders = append(bidders, bidder{FromBidder{}.ID, temp})
@@ -40,21 +42,27 @@ func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction
 
 	gotHighestBid := false
 	if (highestbid.bidammount < FromBidder{}.Amount || (highestbid.bidammount == FromBidder{}.Amount && highestbid.timestamp > FromBidder{}.Timestamp)) {
-		highestbid = bid{FromBidder{}.ID, FromBidder{}.Timestamp}
+		highestbid = bid{FromBidder{}.Amount, FromBidder{}.Timestamp}
+		highestbidder = FromBidder{}.ID
 		gotHighestBid = true
 	}
+
 	if gotHighestBid {
-		return &FromAuction{Acknowledgment: gotHighestBid, Comment: "You got the higest bid"}, nil
+		return &FromAuction{Acknowledgment: gotHighestBid, Comment: "You got the highest bid"}, nil
 	} else {
 		return &FromAuction{Acknowledgment: gotHighestBid, Comment: "bidNotHighEnough"}, nil
 	}
 
 }
 
-// Server sends result to all bidders
 func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error) {
-
+	if !auctionLive {
+		return &Result{AuctionActive: auctionLive, Comment: "Auction hasen't started yet!"}, nil
+	} else {
+		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Ammount: highestbid.bidammount}, nil
+	}
 }
+
 func (ABS *AuctionBidderService) mustEmbedUnimplementedCommunicationServer() {
 	panic("unimplemented")
 }
