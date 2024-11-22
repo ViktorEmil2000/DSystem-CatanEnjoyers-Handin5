@@ -23,6 +23,7 @@ func main() {
 
 	/*
 		SETUP THE AUCTION INSTEAD OF BOOTSERVERSERVICE{}
+		Done :D
 	*/
 
 	cs := auctionBidder.AuctionBidderService{}
