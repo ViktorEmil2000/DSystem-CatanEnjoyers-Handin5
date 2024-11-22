@@ -28,7 +28,7 @@ message FromBidder {
 // Auction responds
 message FromAuction {
   bool acknowledgment = 1;
-
+  string comment = 2;
 }
 
 message Result{
