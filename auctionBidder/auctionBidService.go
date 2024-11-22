@@ -15,7 +15,7 @@ type bidder struct {
 }
 
 type bid struct {
-	bidammount int64
+	bidamount int64
 	timestamp  int64
 }
 
@@ -41,7 +41,7 @@ func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction
 	}
 
 	gotHighestBid := false
-	if (highestbid.bidammount < FromBidder{}.Amount || (highestbid.bidammount == FromBidder{}.Amount && highestbid.timestamp > FromBidder{}.Timestamp)) {
+	if (highestbid.bidamount < FromBidder{}.Amount || (highestbid.bidamount == FromBidder{}.Amount && highestbid.timestamp > FromBidder{}.Timestamp)) {
 		highestbid = bid{FromBidder{}.Amount, FromBidder{}.Timestamp}
 		highestbidder = FromBidder{}.ID
 		gotHighestBid = true
@@ -59,7 +59,7 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 	if !auctionLive {
 		return &Result{AuctionActive: auctionLive, Comment: "Auction hasen't started yet!"}, nil
 	} else {
-		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Ammount: highestbid.bidammount}, nil
+		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Amount: highestbid.bidamount}, nil
 	}
 }
 
