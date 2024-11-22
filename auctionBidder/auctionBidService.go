@@ -27,27 +27,27 @@ type bid struct {
 type AuctionBidderService struct {
 }
 
-func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction, error) {
+func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder) (*FromAuction, error) {
 
 	if !checkAuctionOver() {
 		BidderExists := false
 		for _, element := range bidders {
-			if (element.id == FromBidder{}.ID) {
+			if element.id == FromBidder.ID {
 				BidderExists = true
-				element.bids = append(element.bids, bid{FromBidder{}.Amount, FromBidder{}.Timestamp})
+				element.bids = append(element.bids, bid{FromBidder.Amount, FromBidder.Timestamp})
 				break
 			}
 		}
 		if BidderExists == false {
 			temp := []bid{}
-			temp = append(temp, bid{FromBidder{}.Amount, FromBidder{}.Timestamp})
-			bidders = append(bidders, bidder{FromBidder{}.ID, temp})
+			temp = append(temp, bid{FromBidder.Amount, FromBidder.Timestamp})
+			bidders = append(bidders, bidder{FromBidder.ID, temp})
 		}
 
 		gotHighestBid := false
-		if (highestbid.bidamount < FromBidder{}.Amount || (highestbid.bidamount == FromBidder{}.Amount && highestbid.timestamp > FromBidder{}.Timestamp)) {
-			highestbid = bid{FromBidder{}.Amount, FromBidder{}.Timestamp}
-			highestbidder = FromBidder{}.ID
+		if highestbid.bidamount < FromBidder.Amount || (highestbid.bidamount == FromBidder.Amount && highestbid.timestamp > FromBidder.Timestamp) {
+			highestbid = bid{FromBidder.Amount, FromBidder.Timestamp}
+			highestbidder = FromBidder.ID
 			gotHighestBid = true
 		}
 
@@ -55,7 +55,7 @@ func (ABS *AuctionBidderService) Bid(context.Context, *FromBidder) (*FromAuction
 			log.Printf("we got a new higest bid from bidder with id: %v with the amount %v", highestbidder, highestbid.bidamount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "You got the highest bid"}, nil
 		} else {
-			log.Printf("A bid came thru from %v but it wasen't high enough. Current highest :%v the bid was on :%v", FromBidder{}.ID, highestbid.bidamount, FromBidder{}.Amount)
+			log.Printf("A bid came thru from %v but it wasen't high enough. Current highest :%v the bid was on :%v", FromBidder.ID, highestbid.bidamount, FromBidder.Amount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "bidNotHighEnough"}, nil
 		}
 
@@ -81,8 +81,8 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 		log.Print("As user queried Result and was told : Auction is over")
 		return &Result{AuctionActive: false, Comment: "Auction is over", AuctionOver: true, ID: highestbidder, Amount: highestbid.bidamount}, nil
 	} else {
-		log.Print("As user queried Result and was told : Auctions is going and we have a highest bid")
-		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
+		log.Print("As user queried Result and was told : Auctions is going and the highest bid follows in this package")
+		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and the highest bid follows in this package", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
 	}
 }
 
