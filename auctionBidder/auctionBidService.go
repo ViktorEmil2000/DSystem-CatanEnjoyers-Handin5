@@ -75,13 +75,13 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 	}
 
 	if !auctionLive {
-		log.Print("As user queried Result and was told : Auction hasen't started yet!")
+		log.Print("A user queried Result and was told : Auction hasen't started yet!")
 		return &Result{AuctionActive: auctionLive, Comment: "Auction hasen't started yet!", AuctionOver: false}, nil
 	} else if checkAuctionOver() {
-		log.Print("As user queried Result and was told : Auction is over")
+		log.Print("A user queried Result and was told : Auction is over")
 		return &Result{AuctionActive: false, Comment: "Auction is over", AuctionOver: true, ID: highestbidder, Amount: highestbid.bidamount}, nil
 	} else {
-		log.Print("As user queried Result and was told : Auctions is going and we have a highest bid")
+		log.Print("A user queried Result and was told : Auctions is going and we have a highest bid")
 		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
 	}
 }
