@@ -2,9 +2,9 @@ package auctionBidder
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
-	"fmt"
 )
 
 var (
@@ -53,7 +53,6 @@ func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder
 		}
 
 		if gotHighestBid {
-			fmt.Println("............................................................................")
 			log.Printf("we got a new higest bid from bidder with id: %v with the amount %v$", highestbidder, highestbid.bidamount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "You got the highest bid"}, nil
 		} else {
@@ -80,16 +79,19 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 		fmt.Println()
 		log.Print("A user queried Result and was told : Auction hasen't started yet!")
 		fmt.Println()
+		fmt.Println("............................................................................")
 		return &Result{AuctionActive: auctionLive, Comment: "Auction hasen't started yet!", AuctionOver: false}, nil
 	} else if checkAuctionOver() {
 		fmt.Println()
 		log.Print("A user queried Result and was told : Auction is over")
 		fmt.Println()
+		fmt.Println("............................................................................")
 		return &Result{AuctionActive: false, Comment: "Auction is over", AuctionOver: true, ID: highestbidder, Amount: highestbid.bidamount}, nil
 	} else {
 		fmt.Println()
-		log.Print("A user queried Result and was told : Auctions is going and we have a highest bid")
+		log.Print("A user queried Result and was told : Auctions is going and we have a new highest bid")
 		fmt.Println()
+		fmt.Println("............................................................................")
 		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a new highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
 
 	}
