@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"math/rand"
 	"sync"
 	"time"
 
 	"github.com/ViktorEmil2000/DSystem-CatanEnjoyers-Handin5/auctionBidder"
+	"golang.org/x/exp/rand"
 	"google.golang.org/grpc"
 )
 
@@ -48,12 +48,11 @@ func initializeBidder() {
 func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyAmount int64) (*auctionBidder.Result, error) {
 	for {
 		fmt.Println("............................................................")
-		time.Sleep(time.Millisecond * 3000)
+		time.Sleep(time.Millisecond * 000)
 		result, err := Client.Result(context.Background(), &auctionBidder.Empty{})
 		if err != nil {
 			log.Fatalf("Could not get receive %s:", err)
 		}
-		highestBid := result.Amount
 		if result.AuctionOver {
 			return result, err
 		}
