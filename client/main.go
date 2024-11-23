@@ -6,9 +6,9 @@ import (
 	"log"
 	"sync"
 	"time"
+	"math/rand"
 
 	"github.com/ViktorEmil2000/DSystem-CatanEnjoyers-Handin5/auctionBidder"
-	"golang.org/x/exp/rand"
 	"google.golang.org/grpc"
 )
 
@@ -21,7 +21,6 @@ func main() {
 }
 
 func initializeBidder() {
-	rand.Seed(uint64(time.Now().UnixNano()))
 	var MoneyAmount = int64(rand.Intn(10000) + 5000)
 	var userId = int64(rand.Intn(10000000))
 	log.Print("*****************************************************")
