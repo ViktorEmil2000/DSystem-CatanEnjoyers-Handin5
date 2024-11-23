@@ -83,7 +83,7 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 	} else {
 
 		log.Print("A user queried Result and was told : Auctions is going and we have a highest bid")
-		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
+		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a new highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
 
 	}
 }

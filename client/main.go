@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -20,9 +21,12 @@ func main() {
 }
 
 func initializeBidder() {
-	var MoneyAmount = int64(rand.Intn(5000) + 5000)
+	rand.Seed(uint64(time.Now().UnixNano()))
+	var MoneyAmount = int64(rand.Intn(10000) + 5000)
 	var userId = int64(rand.Intn(10000000))
-
+	log.Print("*****************************************************")
+	log.Printf("New bidder has been registered with ID: %v", userId)
+	log.Print("****************************************************")
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Failed to dial AuctionServer %s:", err)
@@ -35,14 +39,15 @@ func initializeBidder() {
 	}
 
 	if result.ID == userId {
-		log.Printf("Yes my bid is the higest! my ID was: %s", userId)
+		log.Printf("%v: Yes I won with the highest bid of %v$", userId, result.Amount)
 	} else {
-		log.Printf("My was not high enough! my ID was: %s", userId)
+		log.Printf("%v: I didn't win the auction", userId)
 	}
 }
 
 func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyAmount int64) (*auctionBidder.Result, error) {
 	for {
+		fmt.Println("............................................................")
 		time.Sleep(time.Millisecond * 1000)
 		result, err := Client.Result(context.Background(), &auctionBidder.Empty{})
 		if err != nil {
@@ -55,10 +60,10 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyA
 		if result.AuctionActive {
 			if userId != result.ID {
 				highestBid := result.Amount
-				log.Printf("Received message from server: %s", result.Comment)
+				log.Printf("Received message from server: %s: %v$", result.Comment, highestBid)
 
-				if highestBid > MoneyAmount {
-					log.Printf("%v: with %v I can't afford to bid higher than the current bid: %v, so I'm outta here", userId, MoneyAmount, highestBid)
+				if highestBid+1000 > MoneyAmount {
+					log.Printf("%v: with only %v$ my spouse won't forgive me if I use more money than the highest bid: %v$, so I'm outta here", userId, MoneyAmount, highestBid)
 					return result, err
 				} else {
 					var fromAuction, err = sendBid(Client, userId, highestBid)
@@ -67,9 +72,19 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyA
 					}
 
 					if fromAuction.Acknowledgment {
-						log.Printf("Acknowledgement came back positive for: %v: '%v'", userId, fromAuction.Comment)
+						fmt.Println()
+						fmt.Println("*********************************************************")
+						fmt.Printf("Acknowledgement came back positive for: %v: '%v'", userId, fromAuction.Comment)
+						fmt.Println()
+						fmt.Println("*********************************************************")
+						fmt.Println()
 					} else {
-						log.Printf("Acknowledgement came back negative for: %v: '%v'", userId, fromAuction.Comment)
+						fmt.Println()
+						fmt.Println("*********************************************************")
+						fmt.Printf("***Acknowledgement came back negative for: %v: '%v'***", userId, fromAuction.Comment)
+						fmt.Println()
+						fmt.Println("*********************************************************")
+						fmt.Println()
 					}
 				}
 			} else {
@@ -85,6 +100,7 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyA
 
 func sendBid(Client auctionBidder.CommunicationClient, userId int64, highestBid int64) (*auctionBidder.FromAuction, error) {
 	var bidAmount = highestBid + int64(rand.Intn(900)+100)
+	log.Printf("Hmmm I can afford to bid higher than %v$... I WANT TO BID %v$!!!", highestBid, bidAmount)
 	result, err := Client.Bid(context.Background(), &auctionBidder.FromBidder{
 		Amount:    bidAmount,
 		ID:        userId,
