@@ -1,0 +1,478 @@
+//AuctionServer Log
+
+2024/11/25 18:47:16 Listening @ : 50052
+2024/11/25 18:47:16 Listening @ : 50051
+
+2024/11/25 18:47:17 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:17 A bid came thru from 4434502 but it wasen't high enough. Current highest :415$ the bid was on :415$
+2024/11/25 18:47:17 We sent a datapackage to Replication server :4434502 , 415
+2024/11/25 18:47:17 we got a new higest bid from bidder with id: 4434502 with the amount 415$
+
+2024/11/25 18:47:18 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:22 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:26 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:28 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:28 A bid came thru from 1223012 but it wasen't high enough. Current highest :1387$ the bid was on :1387$
+2024/11/25 18:47:28 We sent a datapackage to Replication server :1223012 , 1387
+2024/11/25 18:47:28 we got a new higest bid from bidder with id: 1223012 with the amount 1387$
+
+2024/11/25 18:47:29 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:30 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:30 A bid came thru from 4434502 but it wasen't high enough. Current highest :2278$ the bid was on :2278$
+2024/11/25 18:47:30 We sent a datapackage to Replication server :4434502 , 2278
+2024/11/25 18:47:30 we got a new higest bid from bidder with id: 4434502 with the amount 2278$
+
+2024/11/25 18:47:31 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:33 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:33 A bid came thru from 1223012 but it wasen't high enough. Current highest :2604$ the bid was on :2604$
+2024/11/25 18:47:33 We sent a datapackage to Replication server :1223012 , 2604
+2024/11/25 18:47:33 we got a new higest bid from bidder with id: 1223012 with the amount 2604$
+
+2024/11/25 18:47:34 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:35 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:35 A bid came thru from 4434502 but it wasen't high enough. Current highest :3537$ the bid was on :3537$
+2024/11/25 18:47:35 We sent a datapackage to Replication server :4434502 , 3537
+2024/11/25 18:47:35 we got a new higest bid from bidder with id: 4434502 with the amount 3537$
+
+2024/11/25 18:47:36 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:38 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::..
+2024/11/25 18:47:38 The main Server is now dead!
+2024/11/25 18:47:38 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::....
+
+2024/11/25 18:47:39 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:39 we got a new higest bid from bidder with id: 1223012 with the amount 3642$
+
+2024/11/25 18:47:40 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:41 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:41 we got a new higest bid from bidder with id: 4434502 with the amount 4324$
+
+2024/11/25 18:47:42 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:44 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:44 we got a new higest bid from bidder with id: 1223012 with the amount 4462$
+
+2024/11/25 18:47:45 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:46 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:46 we got a new higest bid from bidder with id: 4434502 with the amount 4926$
+
+2024/11/25 18:47:47 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:49 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:49 we got a new higest bid from bidder with id: 1223012 with the amount 5221$
+
+2024/11/25 18:47:50 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:51 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:51 we got a new higest bid from bidder with id: 4434502 with the amount 6066$
+
+2024/11/25 18:47:52 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:54 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:54 we got a new higest bid from bidder with id: 1223012 with the amount 6592$
+
+2024/11/25 18:47:55 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:56 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:56 we got a new higest bid from bidder with id: 4434502 with the amount 7440$
+
+2024/11/25 18:47:57 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:47:59 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:47:59 we got a new higest bid from bidder with id: 1223012 with the amount 8260$
+
+2024/11/25 18:48:00 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:01 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:48:01 we got a new higest bid from bidder with id: 4434502 with the amount 8520$
+
+2024/11/25 18:48:02 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:04 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:48:04 we got a new higest bid from bidder with id: 1223012 with the amount 8660$
+
+2024/11/25 18:48:05 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:06 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:48:06 we got a new higest bid from bidder with id: 4434502 with the amount 9140$
+
+2024/11/25 18:48:07 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:09 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+2024/11/25 18:48:09 we got a new higest bid from bidder with id: 1223012 with the amount 9728$
+
+2024/11/25 18:48:10 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:11 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:14 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:18 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:22 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:26 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:30 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:34 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:38 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:42 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:46 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:50 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:54 A user queried Result and was told : Auctions is going and we have a new highest bid
+
+............................................................................
+
+2024/11/25 18:48:58 A user queried Result and was told : Auction is over
+
+............................................................................
+
+
+
+
+// Bidder 1   ID: 4434502
+
+2024/11/25 18:47:16 *****************************************************
+2024/11/25 18:47:16 New bidder has been registered with ID: 4434502     
+2024/11/25 18:47:16 ****************************************************
+............................................................
+2024/11/25 18:47:17 Received message from server: Auctions is going and we have a new highest bid: 0$
+2024/11/25 18:47:17 Hmmm I can afford to bid higher than 0$... I WANT TO BID 415$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:18 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:22 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:26 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:30 Received message from server: Auctions is going and we have a new highest bid: 1387$
+2024/11/25 18:47:30 Hmmm I can afford to bid higher than 1387$... I WANT TO BID 2278$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:31 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:35 Received message from server: Auctions is going and we have a new highest bid: 2604$
+2024/11/25 18:47:35 Hmmm I can afford to bid higher than 2604$... I WANT TO BID 3537$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:36 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:40 Could not get receive rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp 
+[::1]:50051: connectex: No connection could be made because the target machine actively refused it.":
+2024/11/25 18:47:40 We lost connection on my server and is trying the backup
+............................................................
+2024/11/25 18:47:41 Received message from server: Auctions is going and we have a new highest bid: 3642$
+2024/11/25 18:47:41 Hmmm I can afford to bid higher than 3642$... I WANT TO BID 4324$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:42 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:46 Received message from server: Auctions is going and we have a new highest bid: 4462$
+2024/11/25 18:47:46 Hmmm I can afford to bid higher than 4462$... I WANT TO BID 4926$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:47 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:51 Received message from server: Auctions is going and we have a new highest bid: 5221$
+2024/11/25 18:47:51 Hmmm I can afford to bid higher than 5221$... I WANT TO BID 6066$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:52 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:56 Received message from server: Auctions is going and we have a new highest bid: 6592$
+2024/11/25 18:47:56 Hmmm I can afford to bid higher than 6592$... I WANT TO BID 7440$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:57 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:01 Received message from server: Auctions is going and we have a new highest bid: 8260$
+2024/11/25 18:48:01 Hmmm I can afford to bid higher than 8260$... I WANT TO BID 8520$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:48:02 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:06 Received message from server: Auctions is going and we have a new highest bid: 8660$
+2024/11/25 18:48:06 Hmmm I can afford to bid higher than 8660$... I WANT TO BID 9140$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 4434502: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:48:07 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:11 Received message from server: Auctions is going and we have a new highest bid: 9728$
+2024/11/25 18:48:11 4434502: with only 9815$ my spouse won't forgive me if I use more money than the highest bid: 9728$, so I'm outta here
+2024/11/25 18:48:11 4434502: I didn't win the auction
+
+
+
+// Bidder 2   ID: 1223012
+
+
+2024/11/25 18:47:27 *****************************************************
+2024/11/25 18:47:27 New bidder has been registered with ID: 1223012     
+2024/11/25 18:47:27 ****************************************************
+............................................................
+2024/11/25 18:47:28 Received message from server: Auctions is going and we have a new highest bid: 415$
+2024/11/25 18:47:28 Hmmm I can afford to bid higher than 415$... I WANT TO BID 1387$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:29 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:33 Received message from server: Auctions is going and we have a new highest bid: 2278$
+2024/11/25 18:47:33 Hmmm I can afford to bid higher than 2278$... I WANT TO BID 2604$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:34 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:38 Could not get receive rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp 
+[::1]:50051: connectex: No connection could be made because the target machine actively refused it.":
+2024/11/25 18:47:38 We lost connection on my server and is trying the backup
+............................................................
+2024/11/25 18:47:39 Received message from server: Auctions is going and we have a new highest bid: 3537$
+2024/11/25 18:47:39 Hmmm I can afford to bid higher than 3537$... I WANT TO BID 3642$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:40 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:44 Received message from server: Auctions is going and we have a new highest bid: 4324$
+2024/11/25 18:47:44 Hmmm I can afford to bid higher than 4324$... I WANT TO BID 4462$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:45 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:49 Received message from server: Auctions is going and we have a new highest bid: 4926$
+2024/11/25 18:47:49 Hmmm I can afford to bid higher than 4926$... I WANT TO BID 5221$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:50 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:54 Received message from server: Auctions is going and we have a new highest bid: 6066$
+2024/11/25 18:47:54 Hmmm I can afford to bid higher than 6066$... I WANT TO BID 6592$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:47:55 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:47:59 Received message from server: Auctions is going and we have a new highest bid: 7440$
+2024/11/25 18:47:59 Hmmm I can afford to bid higher than 7440$... I WANT TO BID 8260$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:48:00 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:04 Received message from server: Auctions is going and we have a new highest bid: 8520$
+2024/11/25 18:48:04 Hmmm I can afford to bid higher than 8520$... I WANT TO BID 8660$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:48:05 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:09 Received message from server: Auctions is going and we have a new highest bid: 9140$
+2024/11/25 18:48:09 Hmmm I can afford to bid higher than 9140$... I WANT TO BID 9728$!!!
+
+*********************************************************
+Acknowledgement came back positive for: 1223012: 'You got the highest bid'
+*********************************************************
+
+............................................................
+2024/11/25 18:48:10 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:14 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:18 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:22 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:26 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:30 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:34 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:38 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:42 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:46 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:50 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:54 I am currently the highest bidder, and do not need to bid
+............................................................
+2024/11/25 18:48:58 1223012: Yes I won with the highest bid of 9728$
+
