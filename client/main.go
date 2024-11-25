@@ -11,6 +11,10 @@ import (
 	"google.golang.org/grpc"
 )
 
+var (
+	port = "50051"
+)
+
 func main() {
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -23,9 +27,10 @@ func initializeBidder() {
 	var MoneyAmount = int64(rand.Intn(5000) + 5000)
 	var userId = int64(rand.Intn(10000000))
 
-	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:"+port, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Failed to dial AuctionServer %s:", err)
+		port = "50052"
 	}
 	Client := auctionBidder.NewCommunicationClient(conn)
 
