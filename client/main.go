@@ -13,11 +13,10 @@ import (
 )
 
 var (
-	port        = "50051"
 	userId      int64
 	MoneyAmount int64
 )
-
+var port = "50051"
 var backupRun = true
 
 func main() {
@@ -41,7 +40,7 @@ func initializebidderVariables() {
 }
 
 func initializeBidder() {
-	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	conn, err := grpc.Dial("localhost:"+port, grpc.WithInsecure())
 	if err != nil {
 		if backupRun {
 			log.Printf("Failed to dial AuctionServer %s:", err)

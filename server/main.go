@@ -10,6 +10,10 @@ import (
 	"google.golang.org/grpc"
 )
 
+var (
+	grpcserver *grpc.Server
+)
+
 func main() {
 
 	AuctionStartTime := int(time.Now().Unix()) + 1
@@ -23,12 +27,7 @@ func main() {
 func staging(isleader bool, AuctionStartTime int) {
 	if isleader {
 		go makeServer(isleader, AuctionStartTime)
-		for int(time.Now().Unix())-AuctionStartTime <= 40 {
 
-		}
-		log.Print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::..")
-		log.Print("The main Server is now dead!")
-		log.Print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::....")
 	} else {
 		go makeServer(isleader, AuctionStartTime)
 		ch := make(chan bool)
@@ -62,7 +61,20 @@ func makeServer(isLeader bool, AuctionStartTime int) {
 	cs := auctionBidder.AuctionBidderService{IsLeader: isLeader}
 	go cs.Initializer(AuctionStartTime)
 	auctionBidder.RegisterCommunicationServer(grpcserver, &cs)
-
+	if isLeader {
+		go kill(*grpcserver, AuctionStartTime)
+	}
 	grpcserver.Serve(listen)
+
+}
+
+func kill(grpcserver grpc.Server, AuctionStartTime int) {
+	for int(time.Now().Unix())-AuctionStartTime <= 20 {
+	}
+
+	log.Print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::..")
+	log.Print("The main Server is now dead!")
+	log.Print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::....")
+	grpcserver.Stop()
 
 }
