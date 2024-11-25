@@ -25,6 +25,7 @@ type bid struct {
 }
 
 type AuctionBidderService struct {
+	IsLeader bool
 }
 
 func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder) (*FromAuction, error) {
@@ -81,8 +82,7 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 		log.Print("A user queried Result and was told : Auction is over")
 		return &Result{AuctionActive: false, Comment: "Auction is over", AuctionOver: true, ID: highestbidder, Amount: highestbid.bidamount}, nil
 	} else {
-
-		log.Print("A user queried Result and was told : Auctions is going and we have a highest bid")
+		log.Printf("A user queried Result and was told : Auctions is going and the current highest bid is by %v and the amout is %v", highestbidder, highestbid.bidamount)
 		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
 
 	}

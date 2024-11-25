@@ -10,13 +10,27 @@ import (
 )
 
 func main() {
+	go makeServer(true)
+	go makeServer(false)
 
+	ch := make(chan bool)
+	ch <- true
+}
+
+func makeServer(isLeader bool) {
 	Port := os.Getenv("PORT")
 	if Port == "" {
-		Port = "50051"
+		if isLeader {
+			Port = "50051"
+		} else {
+			Port = "50052"
+		}
 	}
 
-	listen, _ := net.Listen("tcp", ":"+Port)
+	listen, err := net.Listen("tcp", ":"+Port)
+	if err != nil {
+
+	}
 	log.Println("Listening @ : " + Port)
 
 	grpcserver := grpc.NewServer()
@@ -26,7 +40,7 @@ func main() {
 		Done :D
 	*/
 
-	cs := auctionBidder.AuctionBidderService{}
+	cs := auctionBidder.AuctionBidderService{IsLeader: isLeader}
 	auctionBidder.RegisterCommunicationServer(grpcserver, &cs)
 
 	grpcserver.Serve(listen)
