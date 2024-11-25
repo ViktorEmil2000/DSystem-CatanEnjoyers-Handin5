@@ -21,6 +21,7 @@ var (
 	biddersLock      sync.Mutex
 )
 var kill = false
+var auctionStateLock sync.Mutex
 
 type bidder struct {
 	id   int64
@@ -99,6 +100,8 @@ func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder
 }
 
 func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error) {
+	highestBidLock.Lock()
+    defer highestBidLock.Unlock()
 	if !auctionLive {
 		fmt.Println()
 		log.Print("A user queried Result and was told : Auction hasen't started yet!")
@@ -122,6 +125,8 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 }
 
 func checkAuctionOver() bool {
+	auctionStateLock.Lock()
+    defer auctionStateLock.Unlock()
 	if int(time.Now().Unix())-AuctionStartTime >= 100 {
 		auctionLive = false
 		return true
