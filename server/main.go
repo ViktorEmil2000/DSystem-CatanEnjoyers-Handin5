@@ -12,12 +12,28 @@ import (
 
 func main() {
 
-	AuctionStartTime := int(time.Now().Unix()) + 15
-	go makeServer(true, AuctionStartTime)
-	go makeServer(false, AuctionStartTime)
+	AuctionStartTime := int(time.Now().Unix()) + 1
+	go staging(true, AuctionStartTime)
+	go staging(false, AuctionStartTime)
 
 	ch := make(chan bool)
 	ch <- true
+}
+
+func staging(isleader bool, AuctionStartTime int) {
+	if isleader {
+		go makeServer(isleader, AuctionStartTime)
+		for int(time.Now().Unix())-AuctionStartTime <= 40 {
+
+		}
+		log.Print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::..")
+		log.Print("The main Server is now dead!")
+		log.Print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::....")
+	} else {
+		go makeServer(isleader, AuctionStartTime)
+		ch := make(chan bool)
+		ch <- true
+	}
 }
 
 func makeServer(isLeader bool, AuctionStartTime int) {

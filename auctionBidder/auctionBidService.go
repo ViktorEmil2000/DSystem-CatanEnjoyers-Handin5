@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"sync"
 	"time"
 
 	grpc "google.golang.org/grpc"
@@ -16,7 +17,10 @@ var (
 	bidders          []bidder
 	Client           CommunicationClient
 	AuctionStartTime int
+	highestBidLock   sync.Mutex
+	biddersLock      sync.Mutex
 )
+var kill = false
 
 type bidder struct {
 	id   int64
@@ -47,11 +51,11 @@ func (ABS *AuctionBidderService) Initializer(Auctiongivenstart int) {
 			auctionLive = true
 		}
 	}
-
 }
 
 func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder) (*FromAuction, error) {
 	if !checkAuctionOver() {
+		biddersLock.Lock()
 		BidderExists := false
 		for _, element := range bidders {
 			if element.id == FromBidder.ID {
@@ -65,14 +69,22 @@ func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder
 			temp = append(temp, bid{FromBidder.Amount, FromBidder.Timestamp})
 			bidders = append(bidders, bidder{FromBidder.ID, temp})
 		}
-
+		biddersLock.Unlock()
+		highestBidLock.Lock()
 		gotHighestBid := false
 		if highestbid.bidamount < FromBidder.Amount || (highestbid.bidamount == FromBidder.Amount && highestbid.timestamp > FromBidder.Timestamp) {
 			highestbid = bid{FromBidder.Amount, FromBidder.Timestamp}
 			highestbidder = FromBidder.ID
 			gotHighestBid = true
 		}
-		Client.Bid(ctx, FromBidder)
+		highestBidLock.Unlock()
+		if ABS.IsLeader {
+			_, err := Client.Bid(ctx, FromBidder)
+			if err != nil {
+				log.Fatalf("Unable to contact replication server, data package lost: %s", err)
+			}
+			log.Printf("We sent a datapackage to Replication server :%v , %v", FromBidder.ID, FromBidder.Amount)
+		}
 		if gotHighestBid {
 			log.Printf("we got a new higest bid from bidder with id: %v with the amount %v$", highestbidder, highestbid.bidamount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "You got the highest bid"}, nil
@@ -110,7 +122,7 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 }
 
 func checkAuctionOver() bool {
-	if int(time.Now().Unix())-AuctionStartTime >= 50 {
+	if int(time.Now().Unix())-AuctionStartTime >= 100 {
 		auctionLive = false
 		return true
 	} else {

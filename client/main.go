@@ -13,33 +13,53 @@ import (
 )
 
 var (
-	port = "50051"
+	port        = "50051"
+	userId      int64
+	MoneyAmount int64
 )
+
+var backupRun = true
 
 func main() {
 	var wg sync.WaitGroup
 	wg.Add(1)
 
-	go initializeBidder()
+	go initializebidderVariables()
 	wg.Wait()
 }
 
-func initializeBidder() {
-	var MoneyAmount = int64(rand.Intn(10000) + 5000)
-	var userId = int64(rand.Intn(10000000))
+func initializebidderVariables() {
+	MoneyAmount = int64(rand.Intn(10000) + 5000)
+	userId = int64(rand.Intn(10000000))
 	log.Print("*****************************************************")
 	log.Printf("New bidder has been registered with ID: %v", userId)
 	log.Print("****************************************************")
+	initializeBidder()
+	ch := make(chan bool)
+	ch <- true
+
+}
+
+func initializeBidder() {
 	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("Failed to dial AuctionServer %s:", err)
-		port = "50052"
+		if backupRun {
+			log.Printf("Failed to dial AuctionServer %s:", err)
+		} else {
+			log.Fatalf("Failed to dial AuctionServer %s:", err)
+		}
+		tryOnBackup()
 	}
 	Client := auctionBidder.NewCommunicationClient(conn)
 
 	result, err := startBidding(Client, userId, MoneyAmount)
 	if err != nil {
-		log.Fatalf("Could not get result %s:", err)
+		if backupRun {
+			log.Printf("Could not get result %s:", err)
+		} else {
+			log.Fatalf("Could not get result %s:", err)
+		}
+		tryOnBackup()
 	}
 
 	if result.ID == userId {
@@ -55,7 +75,12 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyA
 		time.Sleep(time.Millisecond * 1000)
 		result, err := Client.Result(context.Background(), &auctionBidder.Empty{})
 		if err != nil {
-			log.Fatalf("Could not get receive %s:", err)
+			if backupRun {
+				log.Printf("Could not get receive %s:", err)
+			} else {
+				log.Fatalf("Could not get receive %s:", err)
+			}
+			tryOnBackup()
 		}
 		if result.AuctionOver {
 			return result, err
@@ -72,7 +97,12 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyA
 				} else {
 					var fromAuction, err = sendBid(Client, userId, highestBid)
 					if err != nil {
-						log.Fatalf("Something went wrong with sendBid-method %s:", err)
+						if backupRun {
+							log.Printf("Something went wrong with sendBid-method %s:", err)
+						} else {
+							log.Fatalf("Something went wrong with sendBid-method %s:", err)
+						}
+						tryOnBackup()
 					}
 
 					if fromAuction.Acknowledgment {
@@ -102,6 +132,13 @@ func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyA
 	}
 }
 
+func tryOnBackup() {
+	port = "50052"
+	log.Print("We lost connection on my server and is trying the backup")
+	backupRun = false
+	initializeBidder()
+}
+
 func sendBid(Client auctionBidder.CommunicationClient, userId int64, highestBid int64) (*auctionBidder.FromAuction, error) {
 	var bidAmount = highestBid + int64(rand.Intn(900)+100)
 	log.Printf("Hmmm I can afford to bid higher than %v$... I WANT TO BID %v$!!!", highestBid, bidAmount)
@@ -111,7 +148,7 @@ func sendBid(Client auctionBidder.CommunicationClient, userId int64, highestBid 
 		Timestamp: time.Now().Unix(),
 	})
 	if err != nil {
-		log.Fatalf("Could not place a bid %s:", err)
+		log.Printf("Could not place a bid %s:", err)
 	}
 
 	return result, err
