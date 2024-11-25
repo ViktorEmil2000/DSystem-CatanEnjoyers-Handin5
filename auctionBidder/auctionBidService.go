@@ -29,6 +29,15 @@ type AuctionBidderService struct {
 	IsLeader bool
 }
 
+func (ABS *AuctionBidderService) Initializer(AuctionStartTime int) {
+	for !auctionLive {
+		if AuctionStartTime == int(time.Now().Unix()) {
+			auctionLive = true
+		}
+	}
+
+}
+
 func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder) (*FromAuction, error) {
 
 	if !checkAuctionOver() {
@@ -68,14 +77,6 @@ func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder
 }
 
 func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error) {
-	if !auctionLive {
-		AuctionStartTime++
-		if AuctionStartTime >= 5 {
-			auctionLive = true
-			AuctionStartTime = int(time.Now().Unix())
-		}
-	}
-
 	if !auctionLive {
 		fmt.Println()
 		log.Print("A user queried Result and was told : Auction hasen't started yet!")

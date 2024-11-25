@@ -4,20 +4,23 @@ import (
 	"log"
 	"net"
 	"os"
+	"time"
 
 	"github.com/ViktorEmil2000/DSystem-CatanEnjoyers-Handin5/auctionBidder"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	go makeServer(true)
-	go makeServer(false)
+
+	AuctionStartTime := int(time.Now().Unix()) + 15
+	go makeServer(true, AuctionStartTime)
+	go makeServer(false, AuctionStartTime)
 
 	ch := make(chan bool)
 	ch <- true
 }
 
-func makeServer(isLeader bool) {
+func makeServer(isLeader bool, AuctionStartTime int) {
 	Port := os.Getenv("PORT")
 	if Port == "" {
 		if isLeader {
@@ -41,6 +44,7 @@ func makeServer(isLeader bool) {
 	*/
 
 	cs := auctionBidder.AuctionBidderService{IsLeader: isLeader}
+	cs.Initializer()
 	auctionBidder.RegisterCommunicationServer(grpcserver, &cs)
 
 	grpcserver.Serve(listen)
