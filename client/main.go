@@ -52,7 +52,7 @@ func initializeBidder() {
 func startBidding(Client auctionBidder.CommunicationClient, userId int64, MoneyAmount int64) (*auctionBidder.Result, error) {
 	for {
 		fmt.Println("............................................................")
-		time.Sleep(time.Millisecond * 000)
+		time.Sleep(time.Millisecond * 1000)
 		result, err := Client.Result(context.Background(), &auctionBidder.Empty{})
 		if err != nil {
 			log.Fatalf("Could not get receive %s:", err)

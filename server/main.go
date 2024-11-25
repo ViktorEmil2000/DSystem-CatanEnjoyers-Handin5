@@ -44,7 +44,7 @@ func makeServer(isLeader bool, AuctionStartTime int) {
 	*/
 
 	cs := auctionBidder.AuctionBidderService{IsLeader: isLeader}
-	cs.Initializer()
+	go cs.Initializer(AuctionStartTime)
 	auctionBidder.RegisterCommunicationServer(grpcserver, &cs)
 
 	grpcserver.Serve(listen)

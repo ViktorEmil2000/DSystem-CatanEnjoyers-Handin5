@@ -5,15 +5,18 @@ import (
 	"fmt"
 	"log"
 	"time"
+
+	grpc "google.golang.org/grpc"
 )
 
 var (
-	auctionLive   bool
-	highestbid    bid
-	highestbidder int64
-	bidders       []bidder
+	auctionLive      bool
+	highestbid       bid
+	highestbidder    int64
+	bidders          []bidder
+	Client           CommunicationClient
+	AuctionStartTime int
 )
-var AuctionStartTime = 0
 
 type bidder struct {
 	id   int64
@@ -29,9 +32,18 @@ type AuctionBidderService struct {
 	IsLeader bool
 }
 
-func (ABS *AuctionBidderService) Initializer(AuctionStartTime int) {
+func (ABS *AuctionBidderService) Initializer(Auctiongivenstart int) {
+	AuctionStartTime = Auctiongivenstart
+	if ABS.IsLeader {
+		conn, err := grpc.Dial("localhost:50052", grpc.WithInsecure())
+		if err != nil {
+			log.Fatalf("Failed to dial AuctionServer %s:", err)
+
+		}
+		Client = NewCommunicationClient(conn)
+	}
 	for !auctionLive {
-		if AuctionStartTime == int(time.Now().Unix()) {
+		if AuctionStartTime <= int(time.Now().Unix()) {
 			auctionLive = true
 		}
 	}
@@ -39,7 +51,6 @@ func (ABS *AuctionBidderService) Initializer(AuctionStartTime int) {
 }
 
 func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder) (*FromAuction, error) {
-
 	if !checkAuctionOver() {
 		BidderExists := false
 		for _, element := range bidders {
@@ -61,7 +72,7 @@ func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder
 			highestbidder = FromBidder.ID
 			gotHighestBid = true
 		}
-
+		Client.Bid(ctx, FromBidder)
 		if gotHighestBid {
 			log.Printf("we got a new higest bid from bidder with id: %v with the amount %v$", highestbidder, highestbid.bidamount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "You got the highest bid"}, nil
@@ -69,7 +80,6 @@ func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder
 			log.Printf("A bid came thru from %v but it wasen't high enough. Current highest :%v$ the bid was on :%v$", FromBidder.ID, highestbid.bidamount, FromBidder.Amount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "bidNotHighEnough"}, nil
 		}
-
 	} else {
 		return &FromAuction{Acknowledgment: false, Comment: "Auction is over"}, nil
 	}
