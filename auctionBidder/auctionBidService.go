@@ -2,6 +2,7 @@ package auctionBidder
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 )
@@ -53,10 +54,10 @@ func (ABS *AuctionBidderService) Bid(ctx context.Context, FromBidder *FromBidder
 		}
 
 		if gotHighestBid {
-			log.Printf("we got a new higest bid from bidder with id: %v with the amount %v", highestbidder, highestbid.bidamount)
+			log.Printf("we got a new higest bid from bidder with id: %v with the amount %v$", highestbidder, highestbid.bidamount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "You got the highest bid"}, nil
 		} else {
-			log.Printf("A bid came thru from %v but it wasen't high enough. Current highest :%v the bid was on :%v", FromBidder.ID, highestbid.bidamount, FromBidder.Amount)
+			log.Printf("A bid came thru from %v but it wasen't high enough. Current highest :%v$ the bid was on :%v$", FromBidder.ID, highestbid.bidamount, FromBidder.Amount)
 			return &FromAuction{Acknowledgment: gotHighestBid, Comment: "bidNotHighEnough"}, nil
 		}
 
@@ -76,14 +77,23 @@ func (ABS *AuctionBidderService) Result(context.Context, *Empty) (*Result, error
 	}
 
 	if !auctionLive {
+		fmt.Println()
 		log.Print("A user queried Result and was told : Auction hasen't started yet!")
+		fmt.Println()
+		fmt.Println("............................................................................")
 		return &Result{AuctionActive: auctionLive, Comment: "Auction hasen't started yet!", AuctionOver: false}, nil
 	} else if checkAuctionOver() {
+		fmt.Println()
 		log.Print("A user queried Result and was told : Auction is over")
+		fmt.Println()
+		fmt.Println("............................................................................")
 		return &Result{AuctionActive: false, Comment: "Auction is over", AuctionOver: true, ID: highestbidder, Amount: highestbid.bidamount}, nil
 	} else {
-		log.Printf("A user queried Result and was told : Auctions is going and the current highest bid is by %v and the amout is %v", highestbidder, highestbid.bidamount)
-		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
+		fmt.Println()
+		log.Print("A user queried Result and was told : Auctions is going and we have a new highest bid")
+		fmt.Println()
+		fmt.Println("............................................................................")
+		return &Result{AuctionActive: auctionLive, Comment: "Auctions is going and we have a new highest bid", ID: highestbidder, Amount: highestbid.bidamount, AuctionOver: false}, nil
 
 	}
 }
